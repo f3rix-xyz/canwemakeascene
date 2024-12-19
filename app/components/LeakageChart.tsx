@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar } from "recharts";
-import { motion } from "framer-motion";
+import { CheckCircle2 } from "lucide-react";
 
 const LeakageChart = () => {
     const [data, setData] = useState<{ [key: string]: number }>({});
@@ -34,6 +34,36 @@ const LeakageChart = () => {
     }).reverse();
 
     const maxValue = Math.max(...chartData.map(item => item.value));
+    const allZeros = maxValue === 0;
+
+    if (allZeros) {
+        return (
+            <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                    <div>
+                        <h2 className="text-2xl font-semibold text-gray-900">Estimated Leakage</h2>
+                        <p className="text-gray-500 mt-1">Last 10 days analysis</p>
+                    </div>
+                    <div className="px-4 py-2 bg-blue-50 rounded-lg">
+                        <span className="text-blue-700 font-medium">0L</span>
+                        <span className="text-blue-600/60 ml-2">Peak</span>
+                    </div>
+                </div>
+
+                <div className="h-[400px] w-full flex items-center justify-center bg-gradient-to-br from-blue-50/50 via-white to-blue-50/50 rounded-xl border border-blue-100">
+                    <div className="text-center space-y-4 px-6 py-8 rounded-xl">
+                        <CheckCircle2 className="w-16 h-16 text-blue-500 mx-auto mb-2" />
+                        <h3 className="text-2xl font-semibold text-blue-900">
+                            No Leakage Detected
+                        </h3>
+                        <p className="text-blue-600 text-lg max-w-md">
+                            Your system has been running efficiently with no detected leaks for the past 10 days.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="space-y-6">
@@ -90,7 +120,7 @@ const LeakageChart = () => {
                                         <div className="bg-white p-4 rounded-lg shadow-lg border border-slate-100">
                                             <p className="text-gray-600">{payload[0].payload.date}</p>
                                             <p className="text-lg font-semibold text-blue-600">
-                                                {payload[0].value?.toLocaleString()}L
+                                                {`${payload[0].value?.toLocaleString()}L`}
                                             </p>
                                         </div>
                                     );
