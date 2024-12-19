@@ -12,7 +12,9 @@ interface MaxFlowData {
 
 const MaxWaterFlow = () => {
     const [data, setData] = useState<MaxFlowData | null>(null);
-    const deviceId = 'AEX4004';
+    const deviceId = typeof window !== 'undefined'
+        ? localStorage.getItem('deviceId')
+        : null;
     const baseUrl = process.env.NEXT_PUBLIC_host;
 
     useEffect(() => {

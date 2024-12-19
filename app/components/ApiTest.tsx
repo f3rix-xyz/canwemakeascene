@@ -2,7 +2,9 @@
 import React, { useEffect } from 'react';
 
 const ApiTest = () => {
-    const deviceId = 'AEX4004';
+    const deviceId = typeof window !== 'undefined'
+        ? localStorage.getItem('deviceId')
+        : null;
 
     useEffect(() => {
         const testApi = async () => {

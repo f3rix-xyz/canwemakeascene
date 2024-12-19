@@ -17,23 +17,41 @@ interface Alert {
 
 const getAlertConfig = (alertType: string) => {
     switch (alertType) {
-        case 'Continuous Flow':
+        case 'ContiFlow':
             return {
                 icon: Droplets,
-                bg: 'bg-red-50',
-                border: 'border-red-100',
-                text: 'text-red-700',
-                iconColor: 'text-red-500',
-                message: 'Flow rate of > 0.3 l/s'
+                bg: 'bg-indigo-50',
+                border: 'border-indigo-100',
+                text: 'text-indigo-700',
+                iconColor: 'text-indigo-500',
+                message: 'Continuous flow detected'
             };
-        case 'Burst Pipe':
+        case 'ReverseFlow':
+            return {
+                icon: RotateCcw,
+                bg: 'bg-emerald-50',
+                border: 'border-emerald-100',
+                text: 'text-emerald-700',
+                iconColor: 'text-emerald-500',
+                message: 'Negative flow detected'
+            };
+        case 'BurstPipe':
             return {
                 icon: ArrowUpRight,
-                bg: 'bg-violet-50',
-                border: 'border-violet-100',
-                text: 'text-violet-700',
-                iconColor: 'text-violet-500',
+                bg: 'bg-rose-50',
+                border: 'border-rose-100',
+                text: 'text-rose-700',
+                iconColor: 'text-rose-500',
                 message: 'Sudden pressure drop detected'
+            };
+        case 'EmptyPipe':
+            return {
+                icon: AlertCircle,
+                bg: 'bg-amber-50',
+                border: 'border-amber-100',
+                text: 'text-amber-700',
+                iconColor: 'text-amber-500',
+                message: 'No water flow detected'
             };
         case 'Freeze':
             return {
@@ -43,15 +61,6 @@ const getAlertConfig = (alertType: string) => {
                 text: 'text-blue-700',
                 iconColor: 'text-blue-500',
                 message: 'Temperature below freezing point'
-            };
-        case 'Reverse Flow':
-            return {
-                icon: RotateCcw,
-                bg: 'bg-amber-50',
-                border: 'border-amber-100',
-                text: 'text-amber-700',
-                iconColor: 'text-amber-500',
-                message: 'Negative flow detected'
             };
         default:
             return {
@@ -101,7 +110,9 @@ const AlertBox = ({ alert, timestamp }: Alert) => {
 
 const Alerts = () => {
     const [alerts, setAlerts] = useState<Alert[]>([]);
-    const deviceId = 'AEX4004';
+    const deviceId = typeof window !== 'undefined'
+        ? localStorage.getItem('deviceId')
+        : null;
     const baseUrl = process.env.NEXT_PUBLIC_host;
 
     useEffect(() => {

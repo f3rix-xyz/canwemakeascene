@@ -10,7 +10,9 @@ interface ConsumptionData {
 const NoConsumption = () => {
     const [data, setData] = useState<ConsumptionData>({});
     const [currentMonth, setCurrentMonth] = useState(new Date());
-    const deviceId = 'AEX4004';
+    const deviceId = typeof window !== 'undefined'
+        ? localStorage.getItem('deviceId')
+        : null;
     const baseUrl = process.env.NEXT_PUBLIC_host;
 
     useEffect(() => {

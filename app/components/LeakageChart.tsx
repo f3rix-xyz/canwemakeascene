@@ -5,7 +5,9 @@ import { motion } from "framer-motion";
 
 const LeakageChart = () => {
     const [data, setData] = useState<{ [key: string]: number }>({});
-    const deviceId = 'AEX4008';
+    const deviceId = typeof window !== 'undefined'
+        ? localStorage.getItem('deviceId')
+        : null;
     const baseUrl = process.env.NEXT_PUBLIC_host;
 
     useEffect(() => {

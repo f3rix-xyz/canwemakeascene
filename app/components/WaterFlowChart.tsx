@@ -38,7 +38,11 @@ const WaterFlowChart = () => {
     const [data, setData] = useState<ReadingData[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-    const deviceId = 'AEX4004';
+    const deviceId = typeof window !== 'undefined'
+        ? localStorage.getItem('deviceId')
+        : null;
+
+
 
     const months = [
         "January", "February", "March", "April", "May", "June",
@@ -107,13 +111,12 @@ const WaterFlowChart = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#FAFBFF] p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16">
-            <div className="min-h-[calc(100vh-48px)] sm:min-h-[calc(100vh-72px)] md:min-h-[calc(100vh-96px)] lg:min-h-[calc(100vh-128px)] 
-                bg-white rounded-xl sm:rounded-2xl lg:rounded-[32px] p-4 sm:p-6 md:p-8 lg:p-12 
-                shadow-[0_0_50px_0_rgba(26,41,85,0.05)]"
+        <div className="bg-[#FAFBFF] p-4 sm:p-6">
+            <div className="bg-white rounded-xl sm:rounded-2xl lg:rounded-[32px] p-4 sm:p-6 
+        shadow-[0_0_50px_0_rgba(26,41,85,0.05)]"
             >
                 {/* Header Area */}
-                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 lg:gap-10 mb-6 lg:mb-10">
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-8 mb-4">
                     {/* Title Section */}
                     <div>
                         <h1 className="text-[#1A2955] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold mb-2 sm:mb-4">
@@ -280,7 +283,7 @@ const WaterFlowChart = () => {
                 </div>
 
                 {/* Chart Area */}
-                <div className="bg-[#F6F8FE] rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-10 h-[400px] sm:h-[450px] lg:h-[500px]">
+                <div className="bg-[#F6F8FE] rounded-xl sm:rounded-2xl p-2 sm:p-6 lg:p-10 h-[350px] sm:h-[450px] lg:h-[60vh]">
                     {isLoading ? (
                         <div className="h-full w-full flex items-center justify-center">
                             <div className="flex flex-col items-center gap-4">
@@ -299,9 +302,9 @@ const WaterFlowChart = () => {
                                 data={data}
                                 margin={{
                                     top: 20,
-                                    right: 30,
-                                    left: 20,
-                                    bottom: 60
+                                    right: 10,
+                                    left: 0,
+                                    bottom: 40
                                 }}
                             >
                                 <CartesianGrid stroke="#E5E9F5" strokeDasharray="8 8" />
@@ -310,50 +313,52 @@ const WaterFlowChart = () => {
                                     tickFormatter={formatXAxisTick}
                                     tick={{
                                         fill: '#1A2955',
-                                        fontSize: 12,
+                                        fontSize: 10,
                                         fontWeight: 500
                                     }}
-                                    axisLine={{ stroke: '#E5E9F5', strokeWidth: 2 }}
-                                    tickLine={{ stroke: '#E5E9F5', strokeWidth: 2 }}
-                                    interval={0}
+                                    axisLine={{ stroke: '#E5E9F5', strokeWidth: 1 }}
+                                    tickLine={{ stroke: '#E5E9F5', strokeWidth: 1 }}
+                                    interval={'preserveStartEnd'}
                                     angle={45}
                                     textAnchor="start"
-                                    height={60}
-                                    padding={{ left: 30, right: 30 }}
+                                    height={50}
+                                    padding={{ left: 10, right: 10 }}
+                                    minTickGap={5}
+                                    scale="band"
                                 />
                                 <YAxis
                                     domain={calculateYDomain(data)}
                                     tick={{
                                         fill: '#1A2955',
-                                        fontSize: 12,
+                                        fontSize: 10,
                                         fontWeight: 500
                                     }}
-                                    axisLine={{ stroke: '#E5E9F5', strokeWidth: 2 }}
-                                    tickLine={{ stroke: '#E5E9F5', strokeWidth: 2 }}
-                                    width={80}
-                                    tickFormatter={(value) => `${value.toLocaleString()} L`}
-                                    padding={{ top: 30, bottom: 30 }}
+                                    axisLine={{ stroke: '#E5E9F5', strokeWidth: 1 }}
+                                    tickLine={{ stroke: '#E5E9F5', strokeWidth: 1 }}
+                                    width={40}
+                                    tickFormatter={(value) => `${value}L`}
+                                    padding={{ top: 20, bottom: 20 }}
                                 />
                                 <Tooltip
                                     contentStyle={{
                                         backgroundColor: 'white',
                                         border: 'none',
-                                        borderRadius: '16px',
+                                        borderRadius: '12px',
                                         boxShadow: '0 4px 20px rgba(26,41,85,0.1)',
-                                        padding: '16px',
+                                        padding: '12px',
                                     }}
                                     itemStyle={{
                                         color: '#1A2955',
-                                        fontSize: '14px',
+                                        fontSize: '12px',
                                         fontWeight: 500
                                     }}
                                     labelStyle={{
                                         color: '#686E80',
-                                        marginBottom: '8px',
-                                        fontSize: '12px'
+                                        marginBottom: '6px',
+                                        fontSize: '10px'
                                     }}
                                     formatter={(value: string) => [
-                                        `${parseInt(value).toLocaleString()} L`,
+                                        `${parseInt(value).toLocaleString()}L`,
                                         'Water Flow'
                                     ]}
                                 />
@@ -374,13 +379,13 @@ const WaterFlowChart = () => {
                                     type="monotone"
                                     dataKey="reading"
                                     stroke="#2E5FF2"
-                                    strokeWidth={3}
+                                    strokeWidth={2}
                                     dot={false}
                                     activeDot={{
-                                        r: 8,
+                                        r: 6,
                                         fill: '#2E5FF2',
                                         stroke: 'white',
-                                        strokeWidth: 3
+                                        strokeWidth: 2
                                     }}
                                 />
                             </LineChart>
