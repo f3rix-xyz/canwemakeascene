@@ -15,7 +15,6 @@ export default function Page() {
 
   return (
     <main className="min-h-screen bg-background">
-      <LogoutButton />
       <div className="pt-16 lg:pt-8">
         <MainLayout />
       </div>

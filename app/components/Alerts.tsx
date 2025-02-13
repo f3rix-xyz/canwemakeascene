@@ -80,27 +80,31 @@ const AlertBox = ({ alert, timestamp }: Alert) => {
 
     return (
         <div className={`
-            group flex items-center justify-between p-4 rounded-xl border
-            transition-all duration-200 hover:shadow-md
+            group flex items-center justify-between p-6 rounded-2xl border
+            transition-all duration-200 hover:shadow-lg
             ${config.bg} ${config.border}
         `}>
             <div className="flex items-center gap-4">
                 <div className={`
-                    p-2 rounded-lg ${config.bg} 
+                    p-3 rounded-xl ${config.bg} 
                     group-hover:scale-110 transition-transform
                 `}>
-                    <Icon className={`w-5 h-5 ${config.iconColor}`} />
+                    <Icon className={`w-6 h-6 ${config.iconColor}`} />
                 </div>
                 <div>
-                    <p className={`font-medium ${config.text}`}>{alert}</p>
-                    <p className="text-sm text-gray-500">{config.message}</p>
+                    <p className={`font-roboto text-lg font-semibold ${config.text}`}>
+                        {alert}
+                    </p>
+                    <p className="font-inter text-base font-medium text-[#686E80]">
+                        {config.message}
+                    </p>
                 </div>
             </div>
             <div className="text-right">
-                <p className={`text-sm font-medium ${config.text}`}>
+                <p className={`font-inter text-base font-medium ${config.text}`}>
                     {format(parseISO(timestamp), 'HH:mm')}
                 </p>
-                <p className="text-sm text-gray-500">
+                <p className="font-inter text-base font-medium text-[#686E80]">
                     {format(parseISO(timestamp), 'dd/MM/yyyy')}
                 </p>
             </div>
@@ -134,31 +138,42 @@ const Alerts = () => {
     }, [deviceId, baseUrl]);
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-8">
             <div className="flex items-center justify-between">
                 <div>
-                    <h2 className="text-xl font-semibold text-gray-900">Alerts</h2>
-                    <p className="text-gray-500 text-sm mt-1">Real-time notifications</p>
+                    <h2 className="font-roboto text-2xl font-semibold text-[#1A2955] mb-2">
+                        Alerts
+                    </h2>
+                    <p className="font-inter text-base font-medium text-[#686E80]">
+                        Real-time notifications
+                    </p>
                 </div>
                 <div className="relative">
-                    <Bell className="w-6 h-6 text-gray-400" />
+                    <Bell className="w-6 h-6 text-[#686E80]" />
                     {alerts.length > 0 && (
-                        <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">
+                        <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full 
+                            text-white font-inter text-xs font-medium 
+                            flex items-center justify-center"
+                        >
                             {alerts.length}
                         </span>
                     )}
                 </div>
             </div>
 
-            <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
+            <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2 
+                scrollbar-thin scrollbar-thumb-[#E5E9F5] scrollbar-track-transparent"
+            >
                 {alerts.map((alert, index) => (
                     <AlertBox key={index} {...alert} />
                 ))}
 
                 {alerts.length === 0 && (
-                    <div className="text-center py-8">
-                        <AlertCircle className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                        <p className="text-gray-500">No active alerts</p>
+                    <div className="text-center py-12">
+                        <AlertCircle className="w-12 h-12 text-[#E5E9F5] mx-auto mb-4" />
+                        <p className="font-inter text-base font-medium text-[#686E80]">
+                            No active alerts
+                        </p>
                     </div>
                 )}
             </div>
@@ -167,3 +182,4 @@ const Alerts = () => {
 };
 
 export default Alerts;
+

@@ -101,113 +101,113 @@ const StatusChanges = () => {
         fetchStatus();
     }, [deviceId, baseUrl]);
 
-    return (
-        <div className="w-full space-y-4 sm:space-y-6 px-2 sm:px-6">
-            {/* Header Row */}
-            <div className="flex items-center justify-between w-full pb-2">
-                <div>
-                    <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Device Status</h2>
-                    <p className="text-xs sm:text-sm text-gray-500">System health monitoring</p>
-                </div>
-                <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1 sm:py-2 bg-emerald-50 rounded-lg">
-                    <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
-                    <span className="text-xs sm:text-sm font-medium text-emerald-700">System Online</span>
-                </div>
+
+return (
+    <div className="w-full space-y-6 px-4 sm:px-6">
+        {/* Header Row */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full pb-4 gap-4">
+            <div>
+                <h2 className="font-roboto text-xl sm:text-2xl font-semibold text-[#1A2955] mb-2">
+                    Device Status
+                </h2>
+                <p className="font-inter text-sm sm:text-base font-medium text-[#686E80]">
+                    System health monitoring
+                </p>
             </div>
+            <div className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-emerald-50 rounded-xl whitespace-nowrap">
+                <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                <span className="font-inter text-sm sm:text-base font-medium text-emerald-700">
+                    System Online
+                </span>
+            </div>
+        </div>
 
-            {/* Timeline Section */}
-            <div className="relative w-full">
-                <div className="absolute left-0 sm:left-6 top-0 bottom-0 w-px bg-gray-200" />
+        {/* Timeline Section */}
+        <div className="relative w-full">
+            {/* Vertical Line */}
+            <div className="absolute left-[18px] sm:left-6 top-0 bottom-0 w-px bg-[#E5E9F5]" />
 
-                <div className="space-y-2 sm:space-y-6">
-                    {statusChanges.map((change, index) => {
-                        const date = parseISO(change.timestamp);
-                        const config = getStatusConfig(change.status);
+            <div className="space-y-6">
+                {statusChanges.map((change, index) => {
+                    const date = parseISO(change.timestamp);
+                    const config = getStatusConfig(change.status);
 
-                        return (
+                    return (
+                        <div
+                            key={index}
+                            className="relative flex items-start pl-[52px] sm:pl-[72px]"
+                        >
+                            {/* Timeline dot */}
                             <div
-                                key={index}
-                                className="relative flex items-center sm:items-start pl-4 sm:pl-12"
-                            >
-                                {/* Timeline dot */}
-                                <div className={`
-                                    absolute -left-1 sm:left-5 w-2 sm:w-3 h-2 sm:h-3 rounded-full 
-                                    top-1/2 sm:top-6 -translate-y-1/2 sm:translate-y-0
+                                className={`
+                                    absolute left-[14px] sm:left-[22px] w-3 h-3 rounded-full 
+                                    top-[28px] 
                                     ${config.iconColor}
-                                `} />
+                                `}
+                            />
 
-                                {/* Mobile View */}
-                                <div className="sm:hidden w-full flex items-center justify-between py-2 px-3 rounded-lg border gap-3
-                                    ${config.bg} ${config.border}">
-                                    <div className="flex items-center gap-3 min-w-0">
-                                        <div className={`flex-shrink-0 p-1.5 rounded-md ${config.iconBg}`}>
-                                            <config.icon className={`w-4 h-4 ${config.iconColor}`} />
-                                        </div>
-                                        <div className="min-w-0">
-                                            <h3 className={`font-medium text-sm ${config.text} truncate`}>
-                                                {config.title}
-                                            </h3>
-                                            <div className="flex items-center gap-2">
-                                                <p className="text-xs text-gray-500">
-                                                    {format(date, 'HH:mm')}
-                                                </p>
-                                                <p className="text-xs text-gray-500">
-                                                    {format(date, 'dd MMM yyyy')}
-                                                </p>
+                            {/* Content Card */}
+                            <div className="w-full">
+                                <div
+                                    className={`p-4 sm:p-6 rounded-xl sm:rounded-2xl border ${config.bg} ${config.border}`}
+                                >
+                                    <div className="flex flex-col sm:flex-row items-start justify-between gap-4">
+                                        <div className="flex items-start gap-4">
+                                            <div
+                                                className={`p-2 sm:p-3 rounded-lg sm:rounded-xl ${config.iconBg}`}
+                                            >
+                                                <config.icon
+                                                    className={`w-5 h-5 sm:w-6 sm:h-6 ${config.iconColor}`}
+                                                />
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Desktop View */}
-                                <div className="hidden sm:block w-full">
-                                    <div className={`p-6 rounded-xl border ${config.bg} ${config.border}`}>
-                                        <div className="flex items-start justify-between">
-                                            <div className="flex items-center gap-4">
-                                                <div className={`p-3 rounded-lg ${config.iconBg}`}>
-                                                    <config.icon className={`w-6 h-6 ${config.iconColor}`} />
-                                                </div>
-                                                <div>
-                                                    <h3 className={`font-medium text-lg ${config.text}`}>
-                                                        {config.title}
-                                                    </h3>
-                                                    <div className="flex items-center gap-4 mt-2">
-                                                        <p className="text-sm text-gray-500">
-                                                            {format(date, 'HH:mm')}
-                                                        </p>
-                                                        <p className="text-sm text-gray-500">
-                                                            {format(date, 'dd MMM yyyy')}
-                                                        </p>
-                                                    </div>
+                                            <div>
+                                                <h3
+                                                    className={`font-roboto text-lg sm:text-xl font-semibold ${config.text}`}
+                                                >
+                                                    {config.title}
+                                                </h3>
+                                                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-[6px]">
+                                                    <p className="font-inter text-sm sm:text-base font-medium text-[#686E80]">
+                                                        {format(date, 'HH:mm')}
+                                                    </p>
+                                                    <p className="font-inter text-sm sm:text-base font-medium text-[#686E80]">
+                                                        {format(date, 'dd MMM yyyy')}
+                                                    </p>
                                                 </div>
                                             </div>
-
-                                            {config.actionRequired && (
-                                                <span className={`
-                                                    px-3 py-1 text-sm font-medium
-                                                    ${config.iconBg} ${config.text} rounded-full
-                                                `}>
-                                                    Action Required
-                                                </span>
-                                            )}
                                         </div>
+
+                                        {config.actionRequired && (
+                                            <span
+                                                className={`
+                                                    px-[10px] py-[6px] sm:px-[16px] sm:py-[8px]
+                                                    font-inter text-sm sm:text-base font-medium
+                                                    ${config.iconBg} ${config.text} rounded-lg sm:rounded-xl
+                                                `}
+                                            >
+                                                Action Required
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                             </div>
-                        );
-                    })}
-                </div>
+                        </div>
+                    );
+                })}
             </div>
-
-            {statusChanges.length === 0 && (
-                <div className="text-center py-4 sm:py-8">
-                    <ActivitySquare className="w-8 h-8 sm:w-12 sm:h-12 text-gray-300 mx-auto mb-2 sm:mb-3" />
-                    <p className="text-sm sm:text-base text-gray-500">No status changes recorded</p>
-                </div>
-            )}
         </div>
-    );
 
+        {/* No Status Changes */}
+        {statusChanges.length === 0 && (
+            <div className="text-center py-8">
+                <ActivitySquare className="w-10 h-10 sm:w-12 sm:h-12 text-[#E5E9F5] mx-auto mb-3" />
+                <p className="font-inter text-sm sm:text-base font-medium text-[#686E80]">
+                    No status changes recorded
+                </p>
+            </div>
+        )}
+    </div>
+);
 };
 
 export default StatusChanges;

@@ -56,7 +56,11 @@ export default {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		}
-  	}
+  	},
+    fontFamily:{
+      'roboto': ['Roboto', 'sans-serif'],
+      'inter': ['Inter', 'sans-serif'],
+    }
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
