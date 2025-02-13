@@ -316,7 +316,7 @@ return (
                                     marginBottom: '6px',
                                     fontSize: '12px',
                                 }}
-                                formatter={(value) => [`${parseInt(value).toLocaleString()}L`, 'Water Flow']}
+                                formatter={(value) => [`${parseInt(String(value)).toLocaleString()}L`, 'Water Flow']}
                             />
                             <defs>
                                 <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
