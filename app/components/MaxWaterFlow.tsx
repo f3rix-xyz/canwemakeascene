@@ -39,17 +39,28 @@ export const MaxWaterFlow = () => {
   const COLORS = ["#3B82F6", "#FCA5A5"];
 
   return (
-    <div className="space-y-8">
-      {/* Header Section - Aligned horizontally */}
-      <div className="flex flex-col gap-2">
-        <h2 className="font-roboto text-2xl font-semibold text-[#1A2955]">
-          Max Water Flow
-        </h2>
-        <p className="font-inter text-base font-medium text-[#686E80]">
-          Yesterday's Analysis
-        </p>
+    <div className="space-y-8 p-6">
+      {/* Header Section with Device Status - Aligned horizontally */}
+      <div className="flex justify-between items-start">
+        <div className="space-y-2">
+          <h2 className="font-roboto text-2xl font-semibold text-[#1A2955]">
+            Max Water Flow
+          </h2>
+          <p className="font-inter text-base font-medium text-[#686E80]">
+            Yesterday's Analysis
+          </p>
+        </div>
+        <div className="space-y-2 text-right">
+          <h2 className="font-roboto text-2xl font-semibold text-[#1A2955]">
+            Device Status
+          </h2>
+          <p className="font-inter text-base font-medium text-[#686E80]">
+            System health monitoring
+          </p>
+        </div>
       </div>
 
+      {/* Chart Section */}
       <div className="relative h-[240px] flex items-center justify-center">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
@@ -85,6 +96,7 @@ export const MaxWaterFlow = () => {
         </div>
       </div>
 
+      {/* Stats and Threshold Section */}
       <div className="space-y-6">
         <div className="grid grid-cols-2 gap-6">
           {pieData.map((item, index) => (
