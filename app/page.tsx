@@ -1,8 +1,8 @@
 "use client";
+
 import { useEffect } from "react";
 import { useRouter } from "next/navigation"; // Changed this line
-import MainLayout from "./components/MainLayout";
-import LogoutButton from "./components/LogoutButton";
+import { MainLayout } from "./components/MainLayout";
 
 export default function Page() {
   const router = useRouter();

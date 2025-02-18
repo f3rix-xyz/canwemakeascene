@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { type FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -21,16 +21,13 @@ export default function InlineLoginForm() {
             const deviceId = formData.get("deviceId") as string;
             const initialPin = formData.get("initialPin") as string;
             try {
-              const response = await fetch(
-                `${baseUrl}/device/deviceLogin`,
-                {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({ deviceId, initialPin }),
-                }
-              );
+              const response = await fetch(`${baseUrl}/device/deviceLogin`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ deviceId, initialPin }),
+              });
               const result = await response.json();
               if (result.jwt) {
                 localStorage.setItem("token", result.jwt);
@@ -50,8 +47,8 @@ export default function InlineLoginForm() {
           className="flex flex-col sm:flex-row items-stretch sm:items-end gap-6"
         >
           <div className="flex-1">
-            <label 
-              htmlFor="deviceId" 
+            <label
+              htmlFor="deviceId"
               className="font-inter text-base font-medium text-[#1A2955] mb-3 block"
             >
               Device ID
@@ -69,8 +66,8 @@ export default function InlineLoginForm() {
           </div>
 
           <div className="flex-1">
-            <label 
-              htmlFor="devicePin" 
+            <label
+              htmlFor="devicePin"
               className="font-inter text-base font-medium text-[#1A2955] mb-3 block"
             >
               Device PIN
@@ -113,4 +110,3 @@ export default function InlineLoginForm() {
     </div>
   );
 }
-
