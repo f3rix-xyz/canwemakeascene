@@ -1,18 +1,13 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Calendar as CalendarIcon,
-} from "lucide-react";
+
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, CalendarIcon } from "lucide-react";
 import { format, parseISO } from "date-fns";
 
-interface ConsumptionData {
-  [key: string]: string;
-}
-
-const NoConsumption = () => {
-  const [data, setData] = useState<ConsumptionData>({});
+export const NoConsumption = () => {
+  const [data, setData] = useState<{
+    [key: string]: string;
+  }>({});
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const deviceId =
     typeof window !== "undefined" ? localStorage.getItem("deviceId") : null;
@@ -62,7 +57,7 @@ const NoConsumption = () => {
           <div
             key={index}
             className={`aspect-square flex items-center justify-center rounded-lg text-sm
-                            ${!day.hasConsumption ? "bg-green-100 text-green-700 font-medium" : "text-gray-700 hover:bg-slate-50"}`}
+              ${!day.hasConsumption ? "bg-green-100 text-green-700 font-medium" : "text-gray-700 hover:bg-slate-50"}`}
           >
             {format(day.date, "d")}
           </div>
@@ -73,10 +68,10 @@ const NoConsumption = () => {
 
   return (
     <div className="space-y-8">
-      {/* Header Section */}
-      <div>
+      {/* Header Section - Aligned horizontally */}
+      <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
-          <h2 className="text-[2rem] font-semibold text-gray-900 font-roboto">
+          <h2 className="font-roboto text-2xl font-semibold text-[#1A2955]">
             No Consumption
           </h2>
           <div className="flex items-center gap-2 px-3 py-1 bg-green-100 rounded-full whitespace-nowrap">
@@ -86,12 +81,11 @@ const NoConsumption = () => {
             </span>
           </div>
         </div>
-        <p className="text-gray-500 text-base font-inter font-medium mt-4">
+        <p className="font-inter text-base font-medium text-[#686E80]">
           Days without water usage
         </p>
       </div>
 
-      {/* Month Navigation */}
       <div className="flex items-center justify-between mt-6">
         <button
           onClick={() =>
@@ -118,10 +112,7 @@ const NoConsumption = () => {
         </button>
       </div>
 
-      {/* Calendar Rendering */}
       {renderCalendar()}
     </div>
   );
 };
-
-export default NoConsumption;

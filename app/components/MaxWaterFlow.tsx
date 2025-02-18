@@ -1,17 +1,16 @@
 "use client";
-import React, { useState, useEffect } from "react";
+
+import { useState, useEffect } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { ArrowUp } from "lucide-react";
 
-interface MaxFlowData {
-  percentage: number;
-  totalReadings: number;
-  maxFlowAlerts: number;
-  date: string;
-}
-
-const MaxWaterFlow = () => {
-  const [data, setData] = useState<MaxFlowData | null>(null);
+export const MaxWaterFlow = () => {
+  const [data, setData] = useState<{
+    percentage: number;
+    totalReadings: number;
+    maxFlowAlerts: number;
+    date: string;
+  } | null>(null);
   const deviceId =
     typeof window !== "undefined" ? localStorage.getItem("deviceId") : null;
   const baseUrl = process.env.NEXT_PUBLIC_host;
@@ -41,8 +40,9 @@ const MaxWaterFlow = () => {
 
   return (
     <div className="space-y-8">
-      <div>
-        <h2 className="font-roboto text-2xl font-semibold text-[#1A2955] mb-2">
+      {/* Header Section - Aligned horizontally */}
+      <div className="flex flex-col gap-2">
+        <h2 className="font-roboto text-2xl font-semibold text-[#1A2955]">
           Max Water Flow
         </h2>
         <p className="font-inter text-base font-medium text-[#686E80]">
@@ -75,7 +75,6 @@ const MaxWaterFlow = () => {
           </PieChart>
         </ResponsiveContainer>
 
-        {/* Center Content */}
         <div className="absolute inset-0 flex items-center justify-center flex-col gap-2">
           <span className="font-roboto text-[2.5rem] font-bold text-[#1A2955]">
             {data?.percentage}%
@@ -86,7 +85,6 @@ const MaxWaterFlow = () => {
         </div>
       </div>
 
-      {/* Legend and Stats */}
       <div className="space-y-6">
         <div className="grid grid-cols-2 gap-6">
           {pieData.map((item, index) => (
@@ -110,7 +108,6 @@ const MaxWaterFlow = () => {
           ))}
         </div>
 
-        {/* Additional Stats */}
         <div className="bg-blue-50 p-6 rounded-xl">
           <div className="flex items-center justify-between">
             <span className="font-inter text-base font-medium text-blue-700">
@@ -126,5 +123,3 @@ const MaxWaterFlow = () => {
     </div>
   );
 };
-
-export default MaxWaterFlow;

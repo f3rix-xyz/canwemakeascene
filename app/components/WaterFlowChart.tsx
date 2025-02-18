@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
+
+import { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -18,13 +19,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -35,7 +29,7 @@ interface ReadingData {
   reading: string;
 }
 
-const WaterFlowChart = () => {
+export const WaterFlowChart = () => {
   const [timeFilter, setTimeFilter] = useState<TimeFilter>("day");
   const [data, setData] = useState<ReadingData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -377,5 +371,3 @@ const WaterFlowChart = () => {
     </div>
   );
 };
-
-export default WaterFlowChart;

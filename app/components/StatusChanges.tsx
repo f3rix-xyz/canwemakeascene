@@ -1,13 +1,9 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { format, parseISO } from "date-fns";
-import {
-  Battery,
-  BatteryLow,
-  ActivitySquare,
-  CheckCircle2,
-} from "lucide-react";
-import { Waves, Wind, Thermometer, Activity } from "lucide-react";
+import { BatteryLow, ActivitySquare, CheckCircle2 } from "lucide-react";
+import { Waves, Thermometer, Activity } from "lucide-react";
 
 interface StatusChange {
   timestamp: string;
@@ -86,7 +82,7 @@ const getStatusConfig = (status: StatusChange["status"]) => {
   };
 };
 
-const StatusChanges = () => {
+export const StatusChanges = () => {
   const [statusChanges, setStatusChanges] = useState<StatusChange[]>([]);
   const deviceId =
     typeof window !== "undefined" ? localStorage.getItem("deviceId") : null;
@@ -214,5 +210,3 @@ const StatusChanges = () => {
     </div>
   );
 };
-
-export default StatusChanges;

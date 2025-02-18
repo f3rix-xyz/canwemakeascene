@@ -1,11 +1,12 @@
-import { type FormEvent, useState } from "react";
+import type { FormEvent, JSX } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RefreshCw, RotateCw } from "lucide-react";
 
-export default function InlineLoginForm() {
+export function InlineLoginForm(): JSX.Element {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const baseUrl = process.env.NEXT_PUBLIC_host;

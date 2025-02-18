@@ -13,11 +13,5 @@ export default function Page() {
     }
   }, [router]);
 
-  return (
-    <main className="min-h-screen bg-background">
-      <div className="pt-16 lg:pt-8">
-        <MainLayout />
-      </div>
-    </main>
-  );
+  return <MainLayout />;
 }

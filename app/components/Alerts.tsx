@@ -116,7 +116,7 @@ const AlertBox = ({ alert, timestamp }: Alert) => {
   );
 };
 
-const Alerts = () => {
+export const Alerts = () => {
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const deviceId =
     typeof window !== "undefined" ? localStorage.getItem("deviceId") : null;
@@ -187,5 +187,3 @@ const Alerts = () => {
     </div>
   );
 };
-
-export default Alerts;

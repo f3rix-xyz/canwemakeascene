@@ -1,5 +1,7 @@
 "use client";
-import { type FormEvent, type JSX, useEffect, useState } from "react";
+
+import { useEffect, useState } from "react";
+import type { JSX, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Image from "next/image";
@@ -71,15 +73,7 @@ export default function LoginPage(): JSX.Element {
             </div>
             <Card className="border-none shadow-2xl bg-white/80 backdrop-blur-sm">
               <CardHeader className="space-y-1 pb-8 text-center">
-                <div className="w-40 h-10 relative mb-8 lg:hidden mx-auto">
-                  <Image
-                    src="/logo.svg"
-                    alt="Company Logo"
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                </div>
+                <div className="w-40 h-10 relative mb-8 lg:hidden mx-auto" />
                 <CardTitle className="text-3xl font-bold text-gray-900">
                   Device Login
                 </CardTitle>

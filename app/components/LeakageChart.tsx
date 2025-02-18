@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import {
   ResponsiveContainer,
@@ -11,7 +12,7 @@ import {
 } from "recharts";
 import { CheckCircle2 } from "lucide-react";
 
-const LeakageChart = () => {
+export const LeakageChart = () => {
   const [data, setData] = useState<{ [key: string]: number }>({});
   const deviceId =
     typeof window !== "undefined" ? localStorage.getItem("deviceId") : null;
@@ -182,5 +183,3 @@ const LeakageChart = () => {
     </div>
   );
 };
-
-export default LeakageChart;
