@@ -23,8 +23,9 @@ export function InlineLoginForm(): JSX.Element {
   };
 
   return (
-    <div className="w-full max-w-[700px] mx-auto bg-white rounded-2xl shadow-lg border border-[#E5E9F5]">
-      <div className="px-6 py-8 sm:px-8">
+    <div className="w-auto bg-white rounded-2xl shadow-lg border border-[#E5E9F5]">
+      {/* Reduced padding slightly for a more compact look in the header */}
+      <div className="px-4 py-4 sm:px-6 sm:py-6">
         <form
           onSubmit={async (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
@@ -46,9 +47,7 @@ export function InlineLoginForm(): JSX.Element {
                 localStorage.setItem("deviceId", deviceId);
                 localStorage.setItem("initialPin", initialPin);
                 toast.success("Login/Refresh successful");
-                // Optionally refresh the page or trigger data refetch instead of push('/')
-                // router.push('/'); // Keep or remove based on desired behavior after refresh
-                window.location.reload(); // Simple way to refresh data on the current page
+                window.location.reload();
               } else {
                 toast.error(result.error || "Login failed. Please try again.");
               }
@@ -58,37 +57,42 @@ export function InlineLoginForm(): JSX.Element {
               setLoading(false);
             }
           }}
-          className="flex flex-col sm:flex-row items-stretch sm:items-end gap-6"
+          className="flex flex-col md:flex-row items-stretch md:items-end gap-3 md:gap-4"
         >
-          <div className="flex-1">
+          {/* Adjusted input containers */}
+          <div className="flex-grow md:flex-grow-0 md:w-48">
+            {" "}
+            {/* Example: Fixed width on medium screens */}
             <label
               htmlFor="deviceId"
-              className="font-inter text-base font-medium text-[#1A2955] mb-3 block"
+              className="font-inter text-sm font-medium text-[#1A2955] mb-2 block" // Reduced font size/margin
             >
               Device ID
             </label>
             <Input
               id="deviceId"
               name="deviceId"
-              placeholder="Enter your device ID"
+              placeholder="Device ID" // Shorter placeholder
               required
-              // Optionally pre-fill if deviceId is in localStorage
               defaultValue={
                 typeof window !== "undefined"
                   ? (localStorage.getItem("deviceId") ?? "")
                   : ""
               }
-              className="h-12 border-[#E5E9F5] rounded-xl w-full
-                font-inter text-base font-medium
+              // Adjusted input style for potentially smaller size
+              className="h-10 border-[#E5E9F5] rounded-lg w-full
+                font-inter text-sm font-medium
                 placeholder:text-[#686E80] focus:border-blue-500
                 transition-colors"
             />
           </div>
 
-          <div className="flex-1">
+          <div className="flex-grow md:flex-grow-0 md:w-48">
+            {" "}
+            {/* Example: Fixed width on medium screens */}
             <label
               htmlFor="devicePin"
-              className="font-inter text-base font-medium text-[#1A2955] mb-3 block"
+              className="font-inter text-sm font-medium text-[#1A2955] mb-2 block" // Reduced font size/margin
             >
               Device PIN
             </label>
@@ -96,55 +100,57 @@ export function InlineLoginForm(): JSX.Element {
               id="devicePin"
               name="initialPin"
               type="password"
-              placeholder="Enter your device PIN"
+              placeholder="PIN" // Shorter placeholder
               required
-              // Optionally pre-fill if initialPin is in localStorage
               defaultValue={
                 typeof window !== "undefined"
                   ? (localStorage.getItem("initialPin") ?? "")
                   : ""
               }
-              className="h-12 border-[#E5E9F5] rounded-xl w-full
-                font-inter text-base font-medium
+              // Adjusted input style for potentially smaller size
+              className="h-10 border-[#E5E9F5] rounded-lg w-full
+                font-inter text-sm font-medium
                 placeholder:text-[#686E80] focus:border-blue-500
                 transition-colors"
             />
           </div>
 
           {/* --- Button Group --- */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:items-end">
+          {/* Adjusted button group layout */}
+          <div className="flex flex-col sm:flex-row gap-2 sm:items-end mt-2 md:mt-0">
             <Button
               type="submit"
               disabled={loading}
-              className="h-12 px-6 bg-blue-500 hover:bg-blue-600
-                text-white font-inter font-medium text-base
-                rounded-xl w-full sm:w-auto transition-colors
+              // Adjusted button style for potentially smaller size
+              className="h-10 px-4 bg-blue-500 hover:bg-blue-600
+                text-white font-inter font-medium text-sm
+                rounded-lg w-full sm:w-auto transition-colors
                 disabled:bg-blue-400 disabled:cursor-not-allowed"
             >
               {loading ? (
-                <div className="flex items-center justify-center gap-2">
-                  <RotateCw className="h-5 w-5 animate-spin" />
+                <div className="flex items-center justify-center gap-1">
+                  <RotateCw className="h-4 w-4 animate-spin" />
                   <span>Refreshing...</span>
                 </div>
               ) : (
-                <div className="flex items-center justify-center gap-2">
-                  <RefreshCw className="h-5 w-5" />
+                <div className="flex items-center justify-center gap-1">
+                  <RefreshCw className="h-4 w-4" />
                   <span>Refresh</span>
                 </div>
               )}
             </Button>
 
-            {/* --- Logout Button (Conditionally Rendered) --- */}
             {isLoggedIn && (
               <Button
-                type="button" // Important: Prevents form submission
+                type="button"
                 onClick={handleLogout}
-                variant="outline" // Use outline or secondary for distinction
-                className="h-12 px-6 border-blue-500 text-blue-500 hover:bg-blue-50 hover:text-blue-600
-                  font-inter font-medium text-base rounded-xl w-full sm:w-auto transition-colors"
+                variant="outline"
+                // Adjusted button style for potentially smaller size
+                className="h-10 px-4 border-blue-500 text-blue-500 hover:bg-blue-50 hover:text-blue-600
+                  font-inter font-medium text-sm rounded-lg w-full sm:w-auto transition-colors"
               >
-                <div className="flex items-center justify-center gap-2">
-                  <LogOut className="h-5 w-5" />
+                <div className="flex items-center justify-center gap-1">
+                  <LogOut className="h-4 w-4" />
                   <span>Logout</span>
                 </div>
               </Button>
