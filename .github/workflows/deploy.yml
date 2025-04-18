@@ -99,7 +99,6 @@ jobs:
             echo "--> Creating new container definition: ${CONTAINER_NAME}"
             podman create \
               -p 3000:3000 \
-              --env-file "\${ENV_FILE_PATH}" \
               --name ${CONTAINER_NAME} \
               ${IMAGE_NAME}
 
