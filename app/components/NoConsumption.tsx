@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, CalendarIcon } from "lucide-react";
 import { format, parseISO } from "date-fns";
+import { baseUrl } from "@/api";
 
 export const NoConsumption = () => {
   const [data, setData] = useState<{
@@ -11,7 +12,6 @@ export const NoConsumption = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const deviceId =
     typeof window !== "undefined" ? localStorage.getItem("deviceId") : null;
-  const baseUrl = process.env.NEXT_PUBLIC_host;
 
   useEffect(() => {
     const fetchConsumption = async () => {

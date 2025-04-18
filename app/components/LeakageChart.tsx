@@ -11,12 +11,12 @@ import {
   Bar,
 } from "recharts";
 import { CheckCircle2 } from "lucide-react";
+import { baseUrl } from "@/api";
 
 export const LeakageChart = () => {
   const [data, setData] = useState<{ [key: string]: number }>({});
   const deviceId =
     typeof window !== "undefined" ? localStorage.getItem("deviceId") : null;
-  const baseUrl = process.env.NEXT_PUBLIC_host;
 
   useEffect(() => {
     const fetchLeakage = async () => {

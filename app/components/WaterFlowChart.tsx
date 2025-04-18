@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/popover";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { baseUrl } from "@/api";
 
 type TimeFilter = "day" | "month" | "year";
 
@@ -99,7 +100,6 @@ export const WaterFlowChart = () => {
 
     setIsLoading(true);
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_host;
       let url = "";
 
       switch (timeFilter) {

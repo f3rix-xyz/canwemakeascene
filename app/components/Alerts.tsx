@@ -9,6 +9,7 @@ import {
   RotateCcw,
   Bell,
 } from "lucide-react";
+import { baseUrl } from "@/api";
 
 interface Alert {
   alert: string;
@@ -120,7 +121,6 @@ export const Alerts = () => {
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const deviceId =
     typeof window !== "undefined" ? localStorage.getItem("deviceId") : null;
-  const baseUrl = process.env.NEXT_PUBLIC_host;
 
   useEffect(() => {
     const fetchAlerts = async () => {

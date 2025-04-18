@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { ArrowUp } from "lucide-react";
+import { baseUrl } from "@/api";
 
 export const MaxWaterFlow = () => {
   const [data, setData] = useState<{
@@ -13,7 +14,6 @@ export const MaxWaterFlow = () => {
   } | null>(null);
   const deviceId =
     typeof window !== "undefined" ? localStorage.getItem("deviceId") : null;
-  const baseUrl = process.env.NEXT_PUBLIC_host;
 
   useEffect(() => {
     const fetchMaxFlow = async () => {

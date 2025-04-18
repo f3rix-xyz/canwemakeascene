@@ -16,11 +16,11 @@ import {
 } from "@/components/ui/card";
 import { Icons } from "@/components/ui/icons";
 import { Label } from "@/components/ui/label";
+import { baseUrl } from "@/api";
 
 export default function LoginPage(): JSX.Element {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const baseUrl = process.env.NEXT_PUBLIC_host;
 
   useEffect(() => {
     if (localStorage.getItem("token")) router.push("/");
