@@ -1,0 +1,7 @@
+.git/
+.github/
+.gitignore
+.next/
+biome.json
+next-env.d.ts
+node_modules/
